@@ -36,25 +36,25 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-4 bg-brand-green px-4 pb-12 pt-2 font-sans dark:bg-[#4d5c2e] sm:px-6 md:px-8 md:pb-16"
+      className="scroll-mt-4 overflow-x-clip bg-brand-green px-4 pb-12 pt-2 font-sans dark:bg-[#4d5c2e] sm:px-6 md:px-8 md:pb-16"
       aria-labelledby="about-heading"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl min-w-0">
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl dark:bg-zinc-900 sm:rounded-[28px]">
-          <div className="grid gap-10 p-8 md:grid-cols-2 md:gap-12 md:p-12 lg:p-14">
-            <div className="flex flex-col justify-center">
-              <p className="mb-3 font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400 md:text-base">
+          <div className="grid min-w-0 gap-8 p-5 sm:gap-10 sm:p-8 md:grid-cols-2 md:gap-12 md:p-12 lg:p-14">
+            <div className="flex min-w-0 max-w-full flex-col justify-center">
+              <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400 md:text-base">
                 About Contra Costa
               </p>
               <h2
                 id="about-heading"
-                className="mb-5 text-2xl font-bold leading-tight tracking-tight text-neutral-800 dark:text-neutral-100 md:text-3xl lg:text-4xl"
+                className="mb-5 max-w-full text-xl font-bold leading-snug tracking-tight text-neutral-800 wrap-anywhere dark:text-neutral-100 sm:text-2xl md:text-3xl md:leading-tight lg:text-4xl"
               >
                 Engineering and construction you can plan around
               </h2>
               <p
                 id="about-story"
-                className="mb-8 max-w-xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-lg"
+                className="mb-8 max-w-full text-base leading-relaxed text-neutral-600 wrap-anywhere dark:text-neutral-400 md:max-w-xl md:text-lg"
               >
                 We partner with owners, architects, and public agencies to
                 deliver structures that balance schedule, budget, and long-term
@@ -77,7 +77,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="relative w-full">
+            <div className="relative w-full min-w-0 max-w-full">
               <div className="relative aspect-4/3 w-full min-h-75 overflow-hidden rounded-2xl sm:min-h-90 md:aspect-5/4 md:min-h-100 lg:min-h-120">
                 <Image
                   key={imageSrc}
