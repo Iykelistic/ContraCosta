@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IMAGES } from "@/lib/assets";
 import DetailVideoSection from "./DetailVideoSection";
 
 export default function DetailPageLayout({
@@ -22,7 +23,7 @@ export default function DetailPageLayout({
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <Link href="/" className="relative block w-36 shrink-0 sm:w-44">
             <Image
-              src="/images/ContraCostaLogo.jpeg"
+              src={IMAGES.logo}
               alt="Contra Costa"
               width={260}
               height={98}

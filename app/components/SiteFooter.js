@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGES } from "@/lib/assets";
 
 const INSTAGRAM_URL =
   "https://www.instagram.com/contracostaresources.nig?igsh=d3NrOTFlOWxxZGhj&utm_source=qr";
@@ -14,7 +15,7 @@ export default function SiteFooter() {
           <div>
             <a href="#" className="inline-block">
               <Image
-                src="/ContraCostaLogo.jpeg"
+                src={IMAGES.logo}
                 alt="Contra Costa"
                 width={260}
                 height={98}

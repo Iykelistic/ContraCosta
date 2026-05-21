@@ -2,27 +2,28 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { IMAGES } from "@/lib/assets";
 
 const STATS = [
   {
     value: "15+",
     label: "Years delivering complex builds",
-    image: "/ContraCosta1.jpeg",
+    image: IMAGES.c1,
   },
   {
     value: "120+",
     label: "Projects delivered across sectors",
-    image: "/ContraCosta2.jpeg",
+    image: IMAGES.c2,
   },
   {
     value: "98%",
     label: "On-time handover (rolling 3 years)",
-    image: "/ContraCosta4.jpeg",
+    image: IMAGES.c4,
   },
   {
     value: "24/7",
     label: "Critical response for active sites",
-    image: "/ContraCosta5.jpeg",
+    image: IMAGES.c5,
   },
 ];
 
@@ -30,17 +31,17 @@ const PILLARS = [
   {
     title: "Preconstruction clarity",
     text: "Early budgets, schedules, and risk logs so owners can decide with confidence.",
-    image: "/ContraCosta2.jpeg",
+    image: IMAGES.c2,
   },
   {
     title: "Field discipline",
     text: "Daily safety walks, trade coordination, and clean documentation at turnover.",
-    image: "/ContraCosta3.jpeg",
+    image: IMAGES.c3,
   },
   {
     title: "Long-term thinking",
     text: "Materials and details chosen for durability—not just the ribbon cutting.",
-    image: "/ContraCosta1.jpeg",
+    image: IMAGES.c1,
   },
 ];
 

@@ -7,10 +7,7 @@ import VideoSkeleton from "./VideoSkeleton";
 const ProjectVideo = lazy(() => import("./ProjectVideo"));
 
 function DetailVideoSection({ src, title }) {
-  const videoProps = useMemo(
-    () => ({ src, title, eager: true }),
-    [src, title],
-  );
+  const videoProps = useMemo(() => ({ src, title }), [src, title]);
 
   useEffect(() => {
     prefetchVideo(src);
