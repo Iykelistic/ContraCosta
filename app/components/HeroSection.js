@@ -1,51 +1,48 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { prefetchVideo } from "@/lib/prefetchVideo";
+import { SERVICES } from "@/lib/services";
+import {
+  HERO_CAROUSEL_SHELL_CLASS,
+  HERO_MEDIA_LAYER_CLASS,
+  HERO_VIEWPORT_COLUMN_CLASS,
+  MEDIA_COVER_CLASS,
+} from "@/lib/media";
 import ThemeToggle from "./ThemeToggle";
 
 const CAROUSEL_SLIDES = [
   {
     type: "image",
-    image: "/ContraCosta1.jpeg",
+    image: "/images/ContraCosta1.jpeg",
     title: "Building spaces where communities thrive",
     subtitle: "From concept to handover, we deliver with precision and care.",
   },
   {
     type: "image",
-    image: "/ContraCosta2.jpeg",
+    image: "/images/ContraCosta2.jpeg",
     title: "Design-forward projects, grounded in execution",
     subtitle: "Smart planning, strong coordination, and reliable site delivery.",
   },
   {
     type: "image",
-    image: "/ContraCosta3.jpeg",
+    image: "/images/ContraCosta3.jpeg",
     title: "Infrastructure that supports everyday life",
     subtitle: "Durable builds created for long-term public and private use.",
   },
   {
     type: "image",
-    image: "/ContraCosta4.jpeg",
+    image: "/images/ContraCosta4.jpeg",
     title: "Modern construction with measurable quality",
     subtitle: "Every phase is tracked for safety, timeline, and workmanship.",
   },
   {
     type: "image",
-    image: "/ContraCosta5.jpeg",
+    image: "/images/ContraCosta5.jpeg",
     title: "Trusted teams for ambitious developments",
     subtitle: "We turn complex briefs into high-performing finished spaces.",
-  },
-  {
-    type: "video",
-    video: "/Oak.mp4",
-    title: "Outdoor environments built to last",
-    subtitle: "Oak development highlights from active site delivery.",
-  },
-  {
-    type: "video",
-    video: "/Interior.mp4",
-    title: "Interior spaces with refined execution",
-    subtitle: "Walkthrough footage from interior finishing and fit-out.",
   },
 ];
 
@@ -63,6 +60,7 @@ const NAV_LINKS = [
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
   const go = useCallback(
@@ -101,52 +99,45 @@ export default function HeroSection() {
     };
   }, [menuOpen]);
 
-  const currentSlide = CAROUSEL_SLIDES[index];
+  useEffect(() => {
+    if (!menuOpen) setServicesOpen(false);
+  }, [menuOpen]);
+
+  const currentSlide = useMemo(
+    () => CAROUSEL_SLIDES[index],
+    [index],
+  );
+
+  const slideCount = useMemo(() => CAROUSEL_SLIDES.length, []);
 
   return (
     <div className="min-h-dvh bg-brand-green p-4 pb-8 font-sans dark:bg-[#4d5c2e] sm:p-6 md:p-8">
-      <div className="mx-auto flex min-h-[calc(100dvh-2rem)] max-w-7xl flex-col sm:min-h-[calc(100dvh-3rem)]">
+      <div className={HERO_VIEWPORT_COLUMN_CLASS}>
         <div
-          className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-[24px] shadow-lg sm:rounded-[28px]"
+          className={`${HERO_CAROUSEL_SHELL_CLASS} isolate min-h-[min(520px,calc(100dvh-6rem))]`}
           role="region"
           aria-roledescription="carousel"
           aria-label="Featured project media"
         >
-          <div className="absolute inset-0">
-            {currentSlide.type === "video" ? (
-              <video
-                key={currentSlide.video}
-                className="h-full w-full object-cover brightness-[1.02] saturate-[0.9] contrast-[1.02]"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={currentSlide.title}
-              >
-                <source src={currentSlide.video} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <Image
-                src={currentSlide.image}
-                alt=""
-                fill
-                priority
-                className="object-cover brightness-[1.02] saturate-[0.9] contrast-[1.02]"
-                sizes="100vw"
-              />
-            )}
-            <div
-              className="absolute inset-0 bg-black/10"
-              aria-hidden
-            />
-          </div>
+          <Image
+            key={currentSlide.image}
+            src={currentSlide.image}
+            alt=""
+            fill
+            priority
+            unoptimized
+            className={`${MEDIA_COVER_CLASS} -z-10`}
+            sizes="100vw"
+          />
+          <div
+            className={`${HERO_MEDIA_LAYER_CLASS} -z-10 bg-black/10`}
+            aria-hidden
+          />
 
           <header className="relative z-10 flex items-start justify-between gap-3 p-5 sm:p-6 md:p-8">
             <a href="#" className="relative z-10 block w-36 shrink-0 sm:w-44">
               <Image
-                src="/ContraCostaLogo.jpeg"
+                src="/images/ContraCostaLogo.jpeg"
                 alt="Contra Costa"
                 width={260}
                 height={98}
@@ -195,7 +186,7 @@ export default function HeroSection() {
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Slide ${i + 1} of ${CAROUSEL_SLIDES.length}`}
+                aria-label={`Slide ${i + 1} of ${slideCount}`}
                 onClick={() => goToSlide(i)}
                 className={`h-2.5 rounded-full transition-all ${
                   i === index
@@ -296,7 +287,81 @@ export default function HeroSection() {
 
             <nav className="mt-14 flex min-h-0 flex-1 flex-col overflow-y-auto pb-28 sm:mt-16">
               <ul className="space-y-5 sm:space-y-6">
-                {NAV_LINKS.map((item) => (
+                {NAV_LINKS.slice(0, 2).map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className={`block text-base font-bold uppercase tracking-wide sm:text-lg ${
+                        item.active ? "text-brand-green" : "text-white hover:text-white/90"
+                      }`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <div className="flex w-full items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen((open) => !open)}
+                      className="menu-service-trigger text-left text-base font-bold uppercase tracking-wide text-white sm:text-lg"
+                    >
+                      Services
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen((open) => !open)}
+                      className="menu-service-caret flex h-9 w-9 shrink-0 items-center justify-center text-white"
+                      aria-expanded={servicesOpen}
+                      aria-controls="menu-services-list"
+                      aria-label={
+                        servicesOpen ? "Collapse services" : "Expand services"
+                      }
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden
+                        className={`transition-transform duration-200 ${
+                          servicesOpen ? "rotate-180" : ""
+                        }`}
+                      >
+                        <path
+                          d="M6 9l6 6 6-6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  {servicesOpen ? (
+                    <ul
+                      id="menu-services-list"
+                      className="mt-3 space-y-2 pl-1 sm:pl-2"
+                    >
+                      {SERVICES.map((service) => (
+                        <li key={service.slug}>
+                          <Link
+                            href={`/services/${service.slug}`}
+                            prefetch
+                            onClick={() => setMenuOpen(false)}
+                            onMouseEnter={() => prefetchVideo(service.video)}
+                            onFocus={() => prefetchVideo(service.video)}
+                            className="menu-service-item text-sm font-normal leading-snug text-white/90 sm:text-base"
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+                {NAV_LINKS.slice(2).map((item) => (
                   <li key={item.label}>
                     <a
                       href={item.href}

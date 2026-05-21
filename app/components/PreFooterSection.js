@@ -157,36 +157,6 @@ export default function PreFooterSection() {
             </li>
           ))}
         </ul>
-
-        <div
-          className={`mt-12 flex flex-col items-center justify-center gap-4 rounded-2xl border border-white/25 bg-white/15 p-8 text-center backdrop-blur-md transition-all duration-300 ease-out hover:border-white/40 hover:bg-white/20 sm:flex-row sm:justify-between sm:text-left motion-reduce:opacity-100 motion-reduce:hover:border-white/25 motion-reduce:hover:bg-white/15 ${
-            inView ? "animate-insights-card" : "opacity-0"
-          }`}
-          style={{
-            animationDelay: inView ? `${80 + (STATS.length + PILLARS.length) * 100}ms` : "0ms",
-          }}
-        >
-          <div>
-            <p className="text-lg font-semibold text-white">Ready to talk scope, budget, or schedule?</p>
-            <p className="mt-1 text-sm text-white/85">
-              Tell us about your project—we’ll respond with next steps, not a generic brochure.
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 sm:justify-end">
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-green shadow-md transition hover:scale-105 hover:bg-white/95 hover:shadow-lg motion-reduce:hover:scale-100"
-            >
-              Start a conversation
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center rounded-full border border-white/50 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:scale-105 hover:border-white/70 hover:bg-white/20 motion-reduce:hover:scale-100"
-            >
-              Review our story
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );

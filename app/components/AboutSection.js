@@ -56,12 +56,9 @@ export default function AboutSection() {
                 id="about-story"
                 className="mb-8 max-w-full text-base leading-relaxed text-neutral-600 wrap-anywhere dark:text-neutral-400 md:max-w-xl md:text-lg"
               >
-                We partner with owners, architects, and public agencies to
-                deliver structures that balance schedule, budget, and long-term
-                performance. From early estimating through closeout, our teams
-                emphasize clear communication, rigorous safety, and workmanship
-                that holds up to real-world use, so the places we build stay
-                dependable for decades.
+                At Contra-Costa Resources, we craft spaces that stand the test
+                of time—blending structural precision with aesthetic innovation.
+                Our passion is turning visionary concepts into tangible reality.
               </p>
               <div>
                 <a

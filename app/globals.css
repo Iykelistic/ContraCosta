@@ -99,3 +99,77 @@ body {
   font-weight: 100;
   font-style: normal;
 }
+
+.featured-project-card {
+  cursor: pointer;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease;
+  will-change: transform;
+}
+
+.featured-project-card:hover {
+  transform: translateY(-10px) scale(1.025);
+  box-shadow:
+    0 20px 40px rgb(0 0 0 / 0.12),
+    0 8px 16px rgb(0 0 0 / 0.08);
+  border-color: color-mix(in srgb, #8da33e 55%, #e5e5e5);
+}
+
+.dark .featured-project-card:hover {
+  border-color: color-mix(in srgb, #b4c53e 45%, #3f3f46);
+}
+
+.menu-service-trigger {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.menu-service-trigger:hover {
+  transform: translateX(4px);
+  opacity: 0.92;
+}
+
+.menu-service-caret {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-service-caret:hover {
+  transform: scale(1.12);
+}
+
+.menu-service-item {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.menu-service-item:hover {
+  transform: translateX(8px);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-project-card,
+  .menu-service-trigger,
+  .menu-service-caret,
+  .menu-service-item {
+    transition: none;
+  }
+
+  .featured-project-card:hover,
+  .menu-service-trigger:hover,
+  .menu-service-caret:hover,
+  .menu-service-item:hover {
+    transform: none;
+  }
+}
