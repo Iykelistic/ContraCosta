@@ -5,6 +5,11 @@ import "./globals.css";
 export const metadata = {
   title: "Contra Costa",
   description: "Contra Costa — construction and engineering",
+  icons: {
+    icon: [{ url: "/images/ContraCostaLogo.jpeg", type: "image/jpeg" }],
+    shortcut: "/images/ContraCostaLogo.jpeg",
+    apple: "/images/ContraCostaLogo.jpeg",
+  },
 };
 
 export default function RootLayout({ children }) {

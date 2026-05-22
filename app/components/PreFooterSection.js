@@ -8,7 +8,7 @@ const STATS = [
   {
     value: "15+",
     label: "Years delivering complex builds",
-    image: IMAGES.c1,
+    image: IMAGES.c3,
   },
   {
     value: "120+",
@@ -19,11 +19,6 @@ const STATS = [
     value: "98%",
     label: "On-time handover (rolling 3 years)",
     image: IMAGES.c4,
-  },
-  {
-    value: "24/7",
-    label: "Critical response for active sites",
-    image: IMAGES.c5,
   },
 ];
 
@@ -41,7 +36,7 @@ const PILLARS = [
   {
     title: "Long-term thinking",
     text: "Materials and details chosen for durability—not just the ribbon cutting.",
-    image: IMAGES.c1,
+    image: IMAGES.c4,
   },
 ];
 
@@ -95,7 +90,7 @@ export default function PreFooterSection() {
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STATS.map((s, i) => (
             <li
               key={s.label}

@@ -16,12 +16,6 @@ import ThemeToggle from "./ThemeToggle";
 const CAROUSEL_SLIDES = [
   {
     type: "image",
-    image: "/images/ContraCosta1.jpeg",
-    title: "Building spaces where communities thrive",
-    subtitle: "From concept to handover, we deliver with precision and care.",
-  },
-  {
-    type: "image",
     image: "/images/ContraCosta2.jpeg",
     title: "Design-forward projects, grounded in execution",
     subtitle: "Smart planning, strong coordination, and reliable site delivery.",

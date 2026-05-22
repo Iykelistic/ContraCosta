@@ -2,15 +2,11 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { IMAGES } from "@/lib/assets";
 
 const AUTO_MS = 6000;
 
-const ABOUT_IMAGES = [
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&h=1000&fit=crop&q=85",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&h=1000&fit=crop&q=85",
-  "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=1400&h=1000&fit=crop&q=85",
-  "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1400&h=1000&fit=crop&q=85",
-];
+const ABOUT_IMAGES = [IMAGES.c2, IMAGES.c3, IMAGES.c4, IMAGES.c5];
 
 export default function AboutSection() {
   const [slide, setSlide] = useState(0);
@@ -81,6 +77,7 @@ export default function AboutSection() {
                   src={imageSrc}
                   alt=""
                   fill
+                  unoptimized
                   className="object-cover brightness-[0.96] saturate-[0.9]"
                   sizes="(min-width: 1024px) 42vw, (min-width: 768px) 45vw, 100vw"
                 />
