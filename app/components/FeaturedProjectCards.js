@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
 import { prefetchVideo } from "@/lib/prefetchVideo";
 import { FEATURED_PROJECTS } from "@/lib/projects";
 
@@ -41,6 +41,16 @@ export default function FeaturedProjectCards() {
   const router = useRouter();
 
   const projects = useMemo(() => FEATURED_PROJECTS, []);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      projects.forEach((project) => {
+        router.prefetch(`/projects/${project.slug}`);
+      });
+    }, 800);
+
+    return () => window.clearTimeout(id);
+  }, [projects, router]);
 
   const handlePrefetch = useCallback(
     (project) => {

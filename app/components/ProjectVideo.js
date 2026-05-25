@@ -4,10 +4,10 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import VideoSkeleton from "./VideoSkeleton";
 
 const FRAME_CLASS =
-  "mx-auto w-full overflow-hidden rounded-[24px] shadow-lg sm:rounded-[28px]";
+  "mx-auto w-full overflow-hidden rounded-[24px] bg-black shadow-lg sm:rounded-[28px]";
 
 const VIDEO_CLASS =
-  "block h-[720px] w-full object-cover object-center";
+  "block h-[720px] w-full object-cover object-center [image-rendering:auto]";
 
 function ProjectVideo({ src, title }) {
   const videoRef = useRef(null);
@@ -56,6 +56,7 @@ function ProjectVideo({ src, title }) {
             playsInline
             preload="auto"
             aria-label={videoLabel}
+            controlsList="nodownload noremoteplayback"
             onLoadedMetadata={handleReady}
             onLoadedData={handleReady}
             onCanPlay={handleReady}

@@ -6,7 +6,12 @@ import { IMAGES } from "@/lib/assets";
 
 const AUTO_MS = 6000;
 
-const ABOUT_IMAGES = [IMAGES.c2, IMAGES.c3, IMAGES.c4, IMAGES.c5];
+const ABOUT_IMAGES = [
+  IMAGES.olivia,
+  IMAGES.siteTruck1,
+  IMAGES.siteTruck,
+  IMAGES.siteWorkers,
+];
 
 export default function AboutSection() {
   const [slide, setSlide] = useState(0);
@@ -37,7 +42,7 @@ export default function AboutSection() {
     >
       <div className="mx-auto max-w-7xl min-w-0">
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl dark:bg-zinc-900 sm:rounded-[28px]">
-          <div className="grid min-w-0 gap-8 p-5 sm:gap-10 sm:p-8 md:grid-cols-2 md:gap-12 md:p-12 lg:p-14">
+          <div className="grid min-w-0 gap-8 p-5 sm:gap-10 sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12 md:p-12 lg:p-14">
             <div className="flex min-w-0 max-w-full flex-col justify-center">
               <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400 md:text-base">
                 About Contra Costa
@@ -71,14 +76,14 @@ export default function AboutSection() {
             </div>
 
             <div className="relative w-full min-w-0 max-w-full">
-              <div className="relative aspect-4/3 w-full min-h-75 overflow-hidden rounded-2xl sm:min-h-90 md:aspect-5/4 md:min-h-100 lg:min-h-120">
+              <div className="relative aspect-4/3 w-full min-h-100 overflow-hidden rounded-2xl sm:min-h-120 md:aspect-auto md:min-h-140 lg:min-h-160">
                 <Image
                   key={imageSrc}
                   src={imageSrc}
                   alt=""
                   fill
                   unoptimized
-                  className="object-cover brightness-[0.96] saturate-[0.9]"
+                  className="object-cover object-[center_22%] brightness-[0.96] saturate-[0.9]"
                   sizes="(min-width: 1024px) 42vw, (min-width: 768px) 45vw, 100vw"
                 />
               </div>

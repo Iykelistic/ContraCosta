@@ -12,25 +12,25 @@ export default function SiteFooter() {
       id="contact"
       className="scroll-mt-4 border-t border-neutral-200 bg-white text-neutral-900 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:px-8 md:py-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          <div className="sm:col-span-2 lg:col-span-1">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-6 md:px-8 md:py-16">
+        <div className="grid gap-10 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-4 lg:gap-8">
+          <div className="mx-auto max-w-sm sm:col-span-2 sm:mx-0 lg:col-span-1">
             <a href="#" className="inline-block">
               <Image
                 src={IMAGES.logoFooter}
                 alt="Contra Costa"
                 width={320}
                 height={120}
-                className="h-auto w-56 max-h-20 object-contain object-left sm:w-64 sm:max-h-24"
+                className="mx-auto h-auto w-56 max-h-20 object-contain sm:mx-0 sm:w-64 sm:max-h-24"
               />
             </a>
-            <p className="mt-4 max-w-sm text-base leading-relaxed text-neutral-600 dark:text-zinc-300 md:text-lg">
+            <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-neutral-600 dark:text-zinc-300 sm:mx-0 md:text-lg">
               Construction and engineering with clear communication, disciplined safety, and work that
               holds up for decades.
             </p>
           </div>
 
-          <div>
+          <div className="mx-auto w-full max-w-sm sm:mx-0">
             <p className="text-base font-semibold text-neutral-900 dark:text-zinc-100 md:text-lg">
               Services
             </p>
@@ -49,7 +49,7 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          <div>
+          <div className="mx-auto w-full max-w-sm sm:mx-0">
             <p className="text-base font-semibold text-neutral-900 dark:text-zinc-100 md:text-lg">
               Explore
             </p>
@@ -81,7 +81,7 @@ export default function SiteFooter() {
             </ul>
           </div>
 
-          <div>
+          <div className="mx-auto w-full max-w-sm sm:mx-0">
             <p className="text-base font-semibold text-neutral-900 dark:text-zinc-100 md:text-lg">
               Contact us
             </p>
@@ -105,7 +105,7 @@ export default function SiteFooter() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white shadow-md ring-1 ring-black/10 transition hover:scale-105 hover:brightness-110 hover:ring-black/15 motion-reduce:transition-none motion-reduce:hover:scale-100"
+              className="mx-auto mt-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white shadow-md ring-1 ring-black/10 transition hover:scale-105 hover:brightness-110 hover:ring-black/15 motion-reduce:transition-none motion-reduce:hover:scale-100 sm:mx-0"
               aria-label="Contra Costa Resources on Instagram"
             >
               <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden>

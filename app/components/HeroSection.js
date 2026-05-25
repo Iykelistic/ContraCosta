@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { IMAGES, VIDEOS } from "@/lib/assets";
 import { prefetchVideo } from "@/lib/prefetchVideo";
 import { SERVICES } from "@/lib/services";
 import {
@@ -16,27 +18,36 @@ import ThemeToggle from "./ThemeToggle";
 const CAROUSEL_SLIDES = [
   {
     type: "image",
-    image: "/images/ContraCosta2.jpeg",
+    image: IMAGES.c2,
     title: "Design-forward projects, grounded in execution",
     subtitle: "Smart planning, strong coordination, and reliable site delivery.",
   },
   {
     type: "image",
-    image: "/images/ContraCosta3.jpeg",
+    image: IMAGES.olivia,
     title: "Infrastructure that supports everyday life",
     subtitle: "Durable builds created for long-term public and private use.",
+    mediaClass: "object-[center_18%]",
+    hideOnMobile: true,
   },
   {
     type: "image",
-    image: "/images/ContraCosta4.jpeg",
+    image: IMAGES.c4,
     title: "Modern construction with measurable quality",
     subtitle: "Every phase is tracked for safety, timeline, and workmanship.",
   },
   {
     type: "image",
-    image: "/images/ContraCosta5.jpeg",
+    image: IMAGES.c5,
     title: "Trusted teams for ambitious developments",
     subtitle: "We turn complex briefs into high-performing finished spaces.",
+  },
+  {
+    type: "video",
+    video: VIDEOS.construction,
+    title: "Construction progress with precision",
+    subtitle: "Site work captured in motion from planning through execution.",
+    mediaClass: "object-[center_18%]",
   },
 ];
 
@@ -53,32 +64,51 @@ const NAV_LINKS = [
 ];
 
 export default function HeroSection() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [index, setIndex] = useState(0);
+
+  const activeSlides = useMemo(
+    () =>
+      isMobile
+        ? CAROUSEL_SLIDES.filter((slide) => !slide.hideOnMobile)
+        : CAROUSEL_SLIDES,
+    [isMobile],
+  );
 
   const go = useCallback(
     (dir) => {
       setIndex((i) => {
-        const n = CAROUSEL_SLIDES.length;
+        const n = activeSlides.length;
         return (i + dir + n) % n;
       });
     },
-    []
+    [activeSlides.length]
   );
 
   const goToSlide = useCallback((i) => {
-    const n = CAROUSEL_SLIDES.length;
+    const n = activeSlides.length;
     setIndex(((i % n) + n) % n);
+  }, [activeSlides.length]);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(query.matches);
+
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
   }, []);
 
   useEffect(() => {
     if (menuOpen) return;
     const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % CAROUSEL_SLIDES.length);
+      setIndex((i) => (i + 1) % activeSlides.length);
     }, AUTO_SLIDE_MS);
     return () => window.clearInterval(id);
-  }, [menuOpen, index]);
+  }, [activeSlides.length, menuOpen, index]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -97,32 +127,66 @@ export default function HeroSection() {
     if (!menuOpen) setServicesOpen(false);
   }, [menuOpen]);
 
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      SERVICES.forEach((service) => {
+        router.prefetch(`/services/${service.slug}`);
+      });
+    }, 1000);
+
+    return () => window.clearTimeout(id);
+  }, [router]);
+
+  useEffect(() => {
+    setIndex((i) => (i >= activeSlides.length ? 0 : i));
+  }, [activeSlides.length]);
+
   const currentSlide = useMemo(
-    () => CAROUSEL_SLIDES[index],
-    [index],
+    () => activeSlides[index] ?? activeSlides[0],
+    [activeSlides, index],
   );
 
-  const slideCount = useMemo(() => CAROUSEL_SLIDES.length, []);
+  const slideCount = activeSlides.length;
 
   return (
     <div className="min-h-dvh bg-brand-green p-4 pb-8 font-sans dark:bg-[#4d5c2e] sm:p-6 md:p-8">
       <div className={HERO_VIEWPORT_COLUMN_CLASS}>
         <div
-          className={`${HERO_CAROUSEL_SHELL_CLASS} isolate min-h-[min(520px,calc(100dvh-6rem))]`}
+          className={`${HERO_CAROUSEL_SHELL_CLASS} isolate min-h-[min(680px,calc(100dvh-2rem))]`}
           role="region"
           aria-roledescription="carousel"
           aria-label="Featured project media"
         >
-          <Image
-            key={currentSlide.image}
-            src={currentSlide.image}
-            alt=""
-            fill
-            priority
-            unoptimized
-            className={`${MEDIA_COVER_CLASS} -z-10`}
-            sizes="100vw"
-          />
+          {currentSlide.type === "video" ? (
+            <video
+              key={currentSlide.video}
+              className={`absolute inset-0 h-full w-full ${MEDIA_COVER_CLASS} ${
+                currentSlide.mediaClass ?? "object-center"
+              } -z-10`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={currentSlide.title}
+            >
+              <source src={currentSlide.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <Image
+              key={currentSlide.image}
+              src={currentSlide.image}
+              alt=""
+              fill
+              priority
+              unoptimized
+              className={`${MEDIA_COVER_CLASS} ${
+                currentSlide.mediaClass ?? "object-center"
+              } -z-10`}
+              sizes="100vw"
+            />
+          )}
           <div
             className={`${HERO_MEDIA_LAYER_CLASS} -z-10 bg-black/10`}
             aria-hidden
@@ -174,7 +238,7 @@ export default function HeroSection() {
             role="tablist"
             aria-label="Choose hero slide"
           >
-            {CAROUSEL_SLIDES.map((_, i) => (
+            {activeSlides.map((_, i) => (
               <button
                 key={i}
                 type="button"
@@ -194,7 +258,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={() => go(-1)}
-            className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:left-5 sm:h-12 sm:w-12"
+            className="absolute bottom-6 right-20 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:bottom-auto sm:left-5 sm:right-auto sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
             aria-label="Previous slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -210,7 +274,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={() => go(1)}
-            className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:right-5 sm:h-12 sm:w-12"
+            className="absolute bottom-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:bottom-auto sm:right-5 sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
             aria-label="Next slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -344,8 +408,14 @@ export default function HeroSection() {
                             href={`/services/${service.slug}`}
                             prefetch
                             onClick={() => setMenuOpen(false)}
-                            onMouseEnter={() => prefetchVideo(service.video)}
-                            onFocus={() => prefetchVideo(service.video)}
+                            onMouseEnter={() => {
+                              router.prefetch(`/services/${service.slug}`);
+                              prefetchVideo(service.video);
+                            }}
+                            onFocus={() => {
+                              router.prefetch(`/services/${service.slug}`);
+                              prefetchVideo(service.video);
+                            }}
                             className="menu-service-item text-sm font-normal leading-snug text-white/90 sm:text-base"
                           >
                             {service.title}
