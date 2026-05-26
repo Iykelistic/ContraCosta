@@ -104,6 +104,7 @@ export default function PreFooterSection() {
                   src={project.image}
                   alt=""
                   fill
+                  unoptimized
                   className={imageHover}
                   sizes="(min-width: 1024px) 30vw, 50vw"
                 />
