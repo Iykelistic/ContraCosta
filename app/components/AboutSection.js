@@ -37,36 +37,54 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-4 overflow-x-clip bg-brand-green px-4 pb-12 pt-2 font-sans dark:bg-[#4d5c2e] sm:px-6 md:px-8 md:pb-16"
+      className="scroll-mt-4 overflow-x-clip bg-white px-4 pb-12 pt-2 font-sans dark:bg-zinc-950 sm:px-6 md:px-8 md:pb-16"
       aria-labelledby="about-heading"
     >
       <div className="mx-auto max-w-7xl min-w-0">
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl dark:bg-zinc-900 sm:rounded-[28px]">
           <div className="grid min-w-0 gap-8 p-5 sm:gap-10 sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12 md:p-12 lg:p-14">
             <div className="flex min-w-0 max-w-full flex-col justify-center">
-              <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400 md:text-base">
+              <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400">
                 About Contra Costa
               </p>
               <h2
                 id="about-heading"
-                className="mb-5 max-w-full text-xl font-bold leading-snug tracking-tight text-neutral-800 wrap-anywhere dark:text-neutral-100 sm:text-2xl md:text-3xl md:leading-tight lg:text-4xl"
+                className="mb-4 max-w-full text-xl font-bold leading-snug tracking-tight text-neutral-800 wrap-anywhere dark:text-neutral-100 sm:text-2xl md:text-3xl md:leading-tight"
               >
                 Engineering and construction you can plan around
               </h2>
-              <p
+              <div
                 id="about-story"
-                className="mb-8 max-w-full text-base leading-relaxed text-neutral-600 wrap-anywhere dark:text-neutral-400 md:max-w-xl md:text-lg"
+                className="mb-8 max-w-full space-y-3.5 text-sm leading-relaxed text-neutral-600 wrap-anywhere dark:text-neutral-400 sm:text-base md:max-w-xl"
               >
-                At Contra-Costa Resources, we craft spaces that stand the test
-                of time—blending structural precision with aesthetic innovation.
-                Our passion is turning visionary concepts into tangible reality.
-              </p>
+                <p>
+                  Contra-Costa Resources is a multidisciplinary construction,
+                  interior design, procurement, and project support company
+                  committed to delivering functional, refined, and high-quality
+                  spaces and services.
+                </p>
+                <p>
+                  Founded in 2016, the company operates at the intersection of
+                  design, execution, sourcing, and technical support, offering
+                  tailored solutions for residential, commercial, hospitality,
+                  and corporate projects. Our approach combines creativity,
+                  structure, technical expertise, and practical project
+                  management to ensure every project is delivered with precision
+                  and purpose.
+                </p>
+                <p>
+                  At Contra-Costa Resources, we understand that every space tells
+                  a story. This is why we focus not only on aesthetics, but also
+                  on functionality, durability, and the overall experience of
+                  the end user.
+                </p>
+              </div>
               <div>
                 <a
                   href="#about-story"
-                  className="group relative inline-flex h-32 w-32 items-center justify-center rounded-full border-2 border-neutral-800 text-center transition hover:border-brand-green hover:text-brand-green dark:border-neutral-200 dark:hover:border-brand-green md:h-36 md:w-36"
+                  className="group relative inline-flex h-32 w-32 items-center justify-center rounded-full border-2 border-brand-green bg-white text-center transition hover:border-brand-dark hover:bg-brand-light/40 md:h-36 md:w-36"
                 >
-                  <span className="px-4 font-serif text-xs font-medium uppercase leading-snug tracking-[0.18em] text-neutral-800 dark:text-neutral-100 md:text-sm">
+                  <span className="px-4 font-serif text-xs font-medium uppercase leading-snug tracking-[0.18em] text-black md:text-sm">
                     About
                     <br />
                     us
@@ -91,7 +109,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 onClick={() => go(-1)}
-                className="absolute left-2 top-1/2 z-10 flex h-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 px-2.5 text-neutral-900 shadow-md backdrop-blur-sm transition hover:bg-white/90 sm:left-3 dark:bg-zinc-800/80 dark:text-white dark:hover:bg-zinc-800"
+                className="hero-control-btn absolute left-2 top-1/2 z-10 h-11 w-11 -translate-y-1/2 sm:left-3"
                 aria-label="Previous slide"
               >
                 <svg
@@ -113,7 +131,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 onClick={() => go(1)}
-                className="absolute right-2 top-1/2 z-10 flex h-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/70 px-2.5 text-neutral-900 shadow-md backdrop-blur-sm transition hover:bg-white/90 sm:right-3 dark:bg-zinc-800/80 dark:text-white dark:hover:bg-zinc-800"
+                className="hero-control-btn absolute right-2 top-1/2 z-10 h-11 w-11 -translate-y-1/2 sm:right-3"
                 aria-label="Next slide"
               >
                 <svg
@@ -148,13 +166,12 @@ export default function AboutSection() {
                     onClick={() => setSlide(i)}
                     className={`h-2 rounded-full transition-all ${
                       i === slide
-                        ? "w-6 bg-neutral-800 dark:bg-white"
-                        : "w-2 bg-neutral-400/80 hover:bg-neutral-600 dark:bg-white/40 dark:hover:bg-white/70"
+                        ? "w-6 bg-brand-green"
+                        : "w-2 bg-neutral-300 hover:bg-brand-green/70 dark:bg-zinc-600 dark:hover:bg-brand-green"
                     }`}
                   />
                 ))}
               </div>
-
             </div>
           </div>
         </div>

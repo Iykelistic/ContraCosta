@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { IMAGES, VIDEOS } from "@/lib/assets";
+import { IMAGES } from "@/lib/assets";
 import { prefetchVideo } from "@/lib/prefetchVideo";
+import { FEATURED_PROJECTS } from "@/lib/projects";
 import { SERVICES } from "@/lib/services";
 import {
   HERO_CAROUSEL_SHELL_CLASS,
@@ -36,19 +37,6 @@ const CAROUSEL_SLIDES = [
     title: "Modern construction with measurable quality",
     subtitle: "Every phase is tracked for safety, timeline, and workmanship.",
   },
-  {
-    type: "image",
-    image: IMAGES.c5,
-    title: "Trusted teams for ambitious developments",
-    subtitle: "We turn complex briefs into high-performing finished spaces.",
-  },
-  {
-    type: "video",
-    video: VIDEOS.construction,
-    title: "Construction progress with precision",
-    subtitle: "Site work captured in motion from planning through execution.",
-    mediaClass: "object-[center_18%]",
-  },
 ];
 
 const AUTO_SLIDE_MS = 5500;
@@ -59,14 +47,13 @@ const INSTAGRAM_URL =
 const NAV_LINKS = [
   { href: "#", label: "Home", active: true },
   { href: "#about", label: "About us" },
-  { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact us" },
 ];
 
 export default function HeroSection() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -124,15 +111,22 @@ export default function HeroSection() {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (!menuOpen) setServicesOpen(false);
+    if (!menuOpen) {
+      setProjectsOpen(false);
+    }
   }, [menuOpen]);
 
   useEffect(() => {
     const id = window.setTimeout(() => {
       SERVICES.forEach((service) => {
         router.prefetch(`/services/${service.slug}`);
+        prefetchVideo(service.video);
       });
-    }, 1000);
+      FEATURED_PROJECTS.forEach((project) => {
+        router.prefetch(`/projects/${project.slug}`);
+        prefetchVideo(project.video);
+      });
+    }, 400);
 
     return () => window.clearTimeout(id);
   }, [router]);
@@ -149,7 +143,7 @@ export default function HeroSection() {
   const slideCount = activeSlides.length;
 
   return (
-    <div className="min-h-dvh bg-brand-green p-4 pb-8 font-sans dark:bg-[#4d5c2e] sm:p-6 md:p-8">
+    <div className="min-h-dvh bg-white p-4 pb-8 font-sans dark:bg-zinc-950 sm:p-6 md:p-8">
       <div className={HERO_VIEWPORT_COLUMN_CLASS}>
         <div
           className={`${HERO_CAROUSEL_SHELL_CLASS} isolate min-h-[min(680px,calc(100dvh-2rem))]`}
@@ -205,18 +199,18 @@ export default function HeroSection() {
               />
             </a>
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-              <ThemeToggle />
+              <ThemeToggle muted />
               <button
                 type="button"
                 onClick={() => setMenuOpen(true)}
-                className="flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold tracking-wide text-neutral-900 shadow-sm transition hover:bg-white/95 sm:px-5 sm:text-[0.8125rem]"
+                className="hero-control-btn !bg-white gap-2 px-4 py-2.5 text-sm font-semibold tracking-wide sm:px-5 sm:text-[0.8125rem]"
                 aria-expanded={menuOpen}
                 aria-controls="site-menu"
               >
                 <span className="flex flex-col gap-[5px]" aria-hidden>
-                  <span className="block h-0.5 w-5 rounded-full bg-neutral-900" />
-                  <span className="block h-0.5 w-5 rounded-full bg-neutral-900" />
-                  <span className="block h-0.5 w-5 rounded-full bg-neutral-900" />
+                  <span className="block h-0.5 w-5 rounded-full bg-current" />
+                  <span className="block h-0.5 w-5 rounded-full bg-current" />
+                  <span className="block h-0.5 w-5 rounded-full bg-current" />
                 </span>
                 MENU
               </button>
@@ -249,8 +243,8 @@ export default function HeroSection() {
                 onClick={() => goToSlide(i)}
                 className={`h-2.5 rounded-full transition-all ${
                   i === index
-                    ? "w-8 bg-white"
-                    : "w-2.5 bg-white/45 hover:bg-white/70"
+                    ? "w-8 bg-brand-green"
+                    : "w-2.5 bg-white/45 hover:bg-brand-green/80"
                 }`}
               />
             ))}
@@ -259,7 +253,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={() => go(-1)}
-            className="absolute bottom-6 right-20 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:bottom-auto sm:left-5 sm:right-auto sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
+            className="hero-control-btn absolute bottom-6 right-20 z-10 h-10 w-10 sm:bottom-auto sm:left-5 sm:right-auto sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
             aria-label="Previous slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -275,7 +269,7 @@ export default function HeroSection() {
           <button
             type="button"
             onClick={() => go(1)}
-            className="absolute bottom-6 right-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/55 text-neutral-900 shadow backdrop-blur-sm transition hover:bg-white/75 sm:bottom-auto sm:right-5 sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
+            className="hero-control-btn absolute bottom-6 right-6 z-10 h-10 w-10 sm:bottom-auto sm:right-5 sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2"
             aria-label="Next slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -297,7 +291,7 @@ export default function HeroSection() {
                 block: "start",
               })
             }
-            className="absolute bottom-6 left-6 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-white/90 text-white transition hover:bg-white/10 sm:bottom-8 sm:left-8"
+            className="hero-control-btn absolute bottom-6 left-6 z-10 h-12 w-12 sm:bottom-8 sm:left-8"
             aria-label="Scroll to About section"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -314,7 +308,7 @@ export default function HeroSection() {
       </div>
 
       {menuOpen ? (
-        <div className="fixed inset-0 z-100" id="site-menu">
+        <div className="fixed inset-0 z-100 overflow-x-hidden" id="site-menu">
           <button
             type="button"
             className="absolute inset-0 z-0 bg-black/45"
@@ -325,9 +319,9 @@ export default function HeroSection() {
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-            className="absolute inset-y-0 right-0 z-10 flex w-[min(calc(100vw/3),380px)] min-w-[220px] flex-col border-x-8 border-brand-green bg-menu-surface text-white shadow-2xl sm:min-w-[240px]"
+            className="absolute inset-y-0 right-0 z-10 flex w-[min(88vw,400px)] min-w-0 max-w-full flex-col border-l-4 border-brand-green bg-menu-surface text-white shadow-2xl"
           >
-          <div className="relative flex min-h-0 flex-1 flex-col pl-5 pr-4 pt-5 sm:pl-7 sm:pr-6 sm:pt-7">
+          <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden pl-5 pr-4 pt-5 sm:pl-7 sm:pr-6 sm:pt-7">
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
@@ -344,8 +338,8 @@ export default function HeroSection() {
               </svg>
             </button>
 
-            <nav className="mt-14 flex min-h-0 flex-1 flex-col overflow-y-auto pb-28 sm:mt-16">
-              <ul className="space-y-5 sm:space-y-6">
+            <nav className="mt-14 flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden overflow-y-auto overscroll-contain sm:mt-16">
+              <ul className="min-w-0 space-y-5 sm:space-y-6">
                 {NAV_LINKS.slice(0, 2).map((item) => (
                   <li key={item.label}>
                     <a
@@ -360,22 +354,45 @@ export default function HeroSection() {
                   </li>
                 ))}
                 <li>
+                  <a
+                    href="#footer-services"
+                    className="flex w-full min-w-0 items-center justify-between gap-3 text-base font-bold uppercase tracking-wide text-white transition hover:text-white/90 sm:text-lg"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span>Services</span>
+                    <span
+                      className="flex h-9 w-9 shrink-0 items-center justify-center text-white"
+                      aria-hidden
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+                <li>
                   <div className="flex w-full items-center justify-between gap-3">
                     <button
                       type="button"
-                      onClick={() => setServicesOpen((open) => !open)}
+                      onClick={() => setProjectsOpen((open) => !open)}
                       className="menu-service-trigger text-left text-base font-bold uppercase tracking-wide text-white sm:text-lg"
                     >
-                      Services
+                      Projects
                     </button>
                     <button
                       type="button"
-                      onClick={() => setServicesOpen((open) => !open)}
+                      onClick={() => setProjectsOpen((open) => !open)}
                       className="menu-service-caret flex h-9 w-9 shrink-0 items-center justify-center text-white"
-                      aria-expanded={servicesOpen}
-                      aria-controls="menu-services-list"
+                      aria-expanded={projectsOpen}
+                      aria-controls="menu-projects-list"
                       aria-label={
-                        servicesOpen ? "Collapse services" : "Expand services"
+                        projectsOpen ? "Collapse projects" : "Expand projects"
                       }
                     >
                       <svg
@@ -385,7 +402,7 @@ export default function HeroSection() {
                         fill="none"
                         aria-hidden
                         className={`transition-transform duration-200 ${
-                          servicesOpen ? "rotate-180" : ""
+                          projectsOpen ? "rotate-180" : ""
                         }`}
                       >
                         <path
@@ -398,10 +415,10 @@ export default function HeroSection() {
                       </svg>
                     </button>
                   </div>
-                  {servicesOpen ? (
+                  {projectsOpen ? (
                     <ul
-                      id="menu-services-list"
-                      className="mt-3 space-y-2 pl-1 sm:pl-2"
+                      id="menu-projects-list"
+                      className="mt-3 min-w-0 space-y-2 pl-1 sm:pl-2"
                     >
                       {SERVICES.map((service) => (
                         <li key={service.slug}>
@@ -417,7 +434,11 @@ export default function HeroSection() {
                               router.prefetch(`/services/${service.slug}`);
                               prefetchVideo(service.video);
                             }}
-                            className="menu-service-item text-sm font-normal leading-snug text-white/90 sm:text-base"
+                            onPointerDown={() => {
+                              router.prefetch(`/services/${service.slug}`);
+                              prefetchVideo(service.video);
+                            }}
+                            className="menu-service-item break-words text-sm font-normal leading-snug text-white/90 sm:text-base"
                           >
                             {service.title}
                           </Link>
@@ -442,13 +463,13 @@ export default function HeroSection() {
               </ul>
             </nav>
 
-            <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6">
+            <div className="mt-4 shrink-0 border-t border-white/15 pt-4">
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white shadow-md ring-1 ring-white/30 transition hover:scale-105 hover:brightness-110 hover:ring-white/50 motion-reduce:transition-none motion-reduce:hover:scale-100 sm:h-14 sm:w-14"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white shadow-md ring-1 ring-white/30 transition hover:scale-105 hover:brightness-110 hover:ring-white/50 motion-reduce:transition-none motion-reduce:hover:scale-100 sm:h-12 sm:w-12"
               >
                 <svg
                   width="26"

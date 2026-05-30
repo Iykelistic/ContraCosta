@@ -12,14 +12,17 @@ export default function DetailPageLayout({
   children,
   videoSrc,
   videoTitle,
+  videoCaption,
+  videoAriaLabel,
+  videoEndAt,
 }) {
   return (
     <main
       id="main-content"
       tabIndex={-1}
-      className="min-h-dvh bg-neutral-950 font-sans text-white outline-none"
+      className="min-h-dvh bg-white font-sans text-neutral-900 outline-none dark:bg-zinc-950 dark:text-zinc-100"
     >
-      <header className="border-b border-white/10 px-4 py-5 sm:px-6 md:px-8">
+      <header className="border-b border-neutral-200 px-4 py-5 sm:px-6 md:px-8 dark:border-white/10">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <Link href="/" className="relative block w-36 shrink-0 sm:w-44">
             <Image
@@ -27,13 +30,13 @@ export default function DetailPageLayout({
               alt="Contra Costa"
               width={260}
               height={98}
-              className="h-auto w-full max-h-12 object-contain object-left brightness-110 sm:max-h-14"
+              className="h-auto w-full max-h-12 object-contain object-left sm:max-h-14"
               priority
             />
           </Link>
           <Link
             href={backHref}
-            className="text-sm font-semibold text-white/85 transition hover:text-white"
+            className="btn-cta px-4 py-2 text-sm"
             prefetch
           >
             {backLabel}
@@ -42,19 +45,25 @@ export default function DetailPageLayout({
       </header>
 
       <article className="mx-auto max-w-4xl px-4 py-8 sm:px-6 md:py-10">
-        <p className="font-serif text-sm font-medium uppercase tracking-[0.2em] text-white/60">
+        <p className="font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-500 dark:text-white/60">
           {eyebrow}
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
           {title}
         </h1>
-        <p className="mt-4 text-lg leading-relaxed text-white/85 md:text-xl">
+        <p className="mt-4 text-lg leading-relaxed text-neutral-700 md:text-xl dark:text-white/85">
           {caption}
         </p>
         {children ? <div className="mt-10">{children}</div> : null}
       </article>
 
-      <DetailVideoSection src={videoSrc} title={videoTitle} />
+      <DetailVideoSection
+        src={videoSrc}
+        title={videoTitle}
+        caption={videoCaption}
+        ariaLabel={videoAriaLabel}
+        endAt={videoEndAt}
+      />
     </main>
   );
 }

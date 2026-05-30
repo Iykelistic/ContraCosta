@@ -13,12 +13,13 @@ const FINISHED_PROJECTS = [
   {
     title: "Refined material choices",
     text: "Surfaces, textures, and fixtures selected to feel premium and last beyond first impressions.",
-    image: IMAGES.finishing2,
+    image: IMAGES.vintage,
   },
   {
     title: "Detail-led execution",
     text: "Every visible edge, joint, and finish is treated as part of the final client experience.",
-    image: IMAGES.finishing3,
+    image: IMAGES.tap,
+    imageHeightClass: "h-72 sm:h-80 lg:h-96",
   },
   {
     title: "Functional elegance",
@@ -67,12 +68,12 @@ export default function PreFooterSection() {
     <section
       ref={rootRef}
       id="insights"
-      className="scroll-mt-4 border-t border-white/15 bg-brand-green px-4 py-14 dark:border-white/10 dark:bg-[#4d5c2e] sm:px-6 md:px-8 md:py-20"
+      className="scroll-mt-4 border-t border-neutral-200 bg-white px-4 py-14 dark:border-zinc-800 dark:bg-zinc-950 sm:px-6 md:px-8 md:py-20"
       aria-labelledby="insights-heading"
     >
       <div className="mx-auto max-w-7xl rounded-[28px] bg-white px-5 py-10 shadow-xl dark:bg-zinc-900 sm:px-8 sm:py-12 md:px-12 md:py-14">
         <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-green dark:text-[#b4c53e] md:text-base">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-green dark:text-brand-accent md:text-base">
             Why choose us
           </p>
           <h2
@@ -99,7 +100,9 @@ export default function PreFooterSection() {
                 animationDelay: inView ? `${80 + i * 100}ms` : "0ms",
               }}
             >
-              <div className="relative h-64 w-full shrink-0 overflow-hidden sm:h-72 lg:h-80">
+              <div
+                className={`relative w-full shrink-0 overflow-hidden ${project.imageHeightClass ?? "h-64 sm:h-72 lg:h-80"}`}
+              >
                 <Image
                   src={project.image}
                   alt=""

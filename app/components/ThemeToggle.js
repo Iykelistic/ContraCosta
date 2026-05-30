@@ -2,13 +2,22 @@
 
 import { useTheme } from "./ThemeProvider";
 
-export default function ThemeToggle({ onLightSurface = false, className = "" }) {
+export default function ThemeToggle({
+  onLightSurface = false,
+  brand = false,
+  muted = false,
+  className = "",
+}) {
   const { theme, toggle } = useTheme();
   const isDark = theme === "dark";
 
-  const surface = onLightSurface
-    ? "border-neutral-300/90 bg-white/95 text-neutral-800 shadow-sm backdrop-blur-sm hover:bg-white dark:border-zinc-600 dark:bg-zinc-800/95 dark:text-white dark:hover:bg-zinc-800"
-    : "border-white/35 bg-white/15 text-white shadow-sm backdrop-blur-sm hover:bg-white/25";
+  const surface = muted
+    ? "hero-control-btn !bg-white border-0"
+    : brand
+    ? "btn-cta-icon border-0 shadow-md"
+    : onLightSurface
+      ? "border-neutral-300/90 bg-white/95 text-neutral-800 shadow-sm backdrop-blur-sm hover:bg-white dark:border-zinc-600 dark:bg-zinc-800/95 dark:text-white dark:hover:bg-zinc-800"
+      : "border-white/35 bg-white/15 text-white shadow-sm backdrop-blur-sm hover:bg-white/25";
 
   return (
     <button

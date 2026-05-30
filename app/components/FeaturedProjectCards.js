@@ -17,21 +17,21 @@ const FeaturedProjectCard = memo(function FeaturedProjectCard({
       prefetch
       onMouseEnter={() => onPrefetch(project)}
       onFocus={() => onPrefetch(project)}
-      className={`featured-project-card group flex min-h-70 flex-col justify-between rounded-[28px] border border-neutral-200 bg-neutral-50 p-6 shadow-md dark:border-zinc-700 dark:bg-zinc-800/60 sm:p-8 ${project.cardOffset}`}
+      onPointerDown={() => onPrefetch(project)}
+      className="featured-project-card group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:border-brand-green/30 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-brand-green/40 sm:p-7"
     >
-      <span className="font-serif text-sm font-medium text-brand-green transition duration-300 group-hover:tracking-wider dark:text-[#b4c53e]">
-        {index + 1}.
+      <span className="text-xs font-semibold tabular-nums text-brand-dark/70 dark:text-brand-accent/80">
+        {String(index + 1).padStart(2, "0")}
       </span>
-      <div className="mt-4 flex flex-1 flex-col justify-center">
-        <h4 className="font-serif text-lg font-semibold uppercase tracking-[0.08em] text-neutral-900 transition duration-300 group-hover:text-brand-green dark:text-white dark:group-hover:text-[#b4c53e] sm:text-xl">
+        <h4 className="mt-3 text-lg font-bold leading-snug tracking-tight text-neutral-900 transition group-hover:text-brand-dark dark:text-white dark:group-hover:text-brand-accent sm:text-xl">
           {project.title}
         </h4>
-        <p className="mt-4 text-sm leading-relaxed text-neutral-600 transition duration-300 group-hover:text-neutral-800 dark:text-neutral-300 dark:group-hover:text-neutral-100 md:text-base">
-          {project.caption}
-        </p>
-      </div>
-      <span className="mt-6 inline-block text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500 transition duration-300 group-hover:translate-x-1 group-hover:text-brand-green dark:text-neutral-400 dark:group-hover:text-[#b4c53e]">
-        View project →
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-base">
+        {project.caption}
+      </p>
+      <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark transition group-hover:gap-2.5 dark:text-brand-accent">
+        View project
+        <span aria-hidden>→</span>
       </span>
     </Link>
   );
@@ -46,8 +46,9 @@ export default function FeaturedProjectCards() {
     const id = window.setTimeout(() => {
       projects.forEach((project) => {
         router.prefetch(`/projects/${project.slug}`);
+        prefetchVideo(project.video);
       });
-    }, 800);
+    }, 400);
 
     return () => window.clearTimeout(id);
   }, [projects, router]);
@@ -61,7 +62,7 @@ export default function FeaturedProjectCards() {
   );
 
   return (
-    <div className="mt-10 grid grid-cols-1 items-start gap-8 sm:mt-12 md:grid-cols-3 md:gap-6 lg:gap-8">
+    <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {projects.map((project, index) => (
         <FeaturedProjectCard
           key={project.slug}

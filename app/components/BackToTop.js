@@ -25,7 +25,7 @@ export default function BackToTop() {
     <button
       type="button"
       onClick={scrollUp}
-      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-800 shadow-lg transition hover:bg-neutral-50 dark:border-zinc-600 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+      className="hero-control-btn fixed bottom-6 right-6 z-50 h-12 w-12"
       aria-label="Back to top"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>

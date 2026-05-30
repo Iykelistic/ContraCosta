@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-200 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-neutral-900 focus:shadow-lg dark:focus:bg-zinc-900 dark:focus:text-white"
+          className="btn-cta sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-200 focus:px-4 focus:py-2.5 focus:text-sm focus:shadow-lg"
         >
           Skip to main content
         </a>

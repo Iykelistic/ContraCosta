@@ -8,7 +8,7 @@ html {
 }
 
 ::selection {
-  background-color: color-mix(in srgb, #8da33e 35%, transparent);
+  background-color: color-mix(in srgb, #4db8d4 35%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -62,20 +62,30 @@ html {
 }
 
 :root {
-  --background: #8da33e;
+  --background: #ffffff;
   --foreground: #171717;
+  --brand: #4db8d4;
+  --brand-hover: #3aa8c4;
+  --brand-foreground: #0a3d4d;
+  --brand-surface: #b5e3f0;
 }
 
 .dark {
-  --background: #4d5c2e;
+  --background: #09090b;
   --foreground: #f4f4f5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-green: #8da33e;
-  --color-menu-surface: #5c5552;
+  --color-brand-green: #4db8d4;
+  --color-brand-hover: #3aa8c4;
+  --color-brand-foreground: #0a3d4d;
+  --color-brand-light: #b5e3f0;
+  --color-brand-dark: #258fa8;
+  --color-brand-accent: #6ecae5;
+  --color-brand-mid: #5abdd4;
+  --color-menu-surface: #3d8fa8;
   --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -90,7 +100,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #8da33e;
+  outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
 
@@ -98,6 +108,97 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
   font-style: normal;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-cta:hover {
+  background-color: var(--brand-hover);
+}
+
+.btn-cta:active {
+  transform: scale(0.98);
+}
+
+.btn-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-cta-icon:hover {
+  background-color: var(--brand-hover);
+}
+
+.btn-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid var(--brand);
+  color: var(--brand);
+  background-color: transparent;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-cta-outline:hover {
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+}
+
+.hero-control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: #737373;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.12);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-control-btn:hover {
+  background-color: #ffffff;
+  color: #525252;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.14);
+}
+
+.dark .hero-control-btn,
+.dark .hero-control-btn:hover {
+  background-color: #ffffff;
+  color: #737373;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta:active {
+    transform: none;
+  }
 }
 
 .featured-project-card {
@@ -110,15 +211,15 @@ body {
 }
 
 .featured-project-card:hover {
-  transform: translateY(-10px) scale(1.025);
+  transform: translateY(-4px);
   box-shadow:
-    0 20px 40px rgb(0 0 0 / 0.12),
-    0 8px 16px rgb(0 0 0 / 0.08);
-  border-color: color-mix(in srgb, #8da33e 55%, #e5e5e5);
+    0 12px 24px rgb(0 0 0 / 0.08),
+    0 4px 8px rgb(0 0 0 / 0.04);
+  border-color: color-mix(in srgb, var(--brand) 40%, #e5e5e5);
 }
 
 .dark .featured-project-card:hover {
-  border-color: color-mix(in srgb, #b4c53e 45%, #3f3f46);
+  border-color: color-mix(in srgb, var(--color-brand-accent) 45%, #3f3f46);
 }
 
 .menu-service-trigger {
@@ -156,6 +257,19 @@ body {
 .menu-service-item:hover {
   transform: translateX(8px);
   color: #fff;
+}
+
+#site-menu {
+  overflow-x: hidden;
+}
+
+#site-menu .menu-service-trigger:hover,
+#site-menu .menu-service-item:hover {
+  transform: none;
+}
+
+#site-menu .menu-service-caret:hover {
+  transform: scale(1.08);
 }
 
 @media (prefers-reduced-motion: reduce) {

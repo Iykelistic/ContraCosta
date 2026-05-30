@@ -4,8 +4,8 @@ import FeaturedProjectCards from "./FeaturedProjectCards";
 function BadgeCard({ tone = "green", title, subtitle, children }) {
   const toneClass =
     tone === "olive"
-      ? "bg-[#b4c53e] text-neutral-900"
-      : "bg-[#87b46b] text-white";
+      ? "bg-brand-mid text-white"
+      : "bg-brand-green text-white";
 
   return (
     <article
@@ -23,7 +23,7 @@ export default function ShowcaseSection() {
   return (
     <section
       id="projects"
-      className="scroll-mt-4 bg-brand-green px-4 pb-12 font-sans dark:bg-[#4d5c2e] sm:px-6 md:px-8 md:pb-16"
+      className="scroll-mt-4 bg-white px-4 pb-12 font-sans dark:bg-zinc-950 sm:px-6 md:px-8 md:pb-16"
       aria-labelledby="showcase-heading"
     >
       <h2 id="showcase-heading" className="sr-only">
@@ -76,12 +76,23 @@ export default function ShowcaseSection() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-7xl rounded-[28px] bg-white px-5 py-10 shadow-xl dark:bg-zinc-900 sm:mt-14 sm:px-8 sm:py-12 md:px-12 md:py-14">
-        <h3 className="text-center text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-3xl lg:text-4xl">
-          Featured Projects
-        </h3>
+      <div className="mx-auto mt-14 max-w-7xl sm:mt-16">
+        <div className="text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-dark dark:text-brand-accent">
+            Our work
+          </p>
+          <h3 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl lg:text-4xl">
+            Featured projects
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-base">
+            A sample of recent builds across residential, commercial, and retail
+            environments.
+          </p>
+        </div>
 
-        <FeaturedProjectCards />
+        <div className="mt-10 sm:mt-12">
+          <FeaturedProjectCards />
+        </div>
       </div>
     </section>
   );

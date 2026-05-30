@@ -1,7 +1,6 @@
 "use client";
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import VideoSkeleton from "./VideoSkeleton";
 
 const FRAME_CLASS =
   "mx-auto w-full overflow-hidden rounded-[24px] bg-black shadow-lg sm:rounded-[28px]";
@@ -9,37 +8,71 @@ const FRAME_CLASS =
 const VIDEO_CLASS =
   "block h-[720px] w-full object-cover object-center [image-rendering:auto]";
 
-function ProjectVideo({ src, title }) {
+function ProjectVideo({ src, title, caption, ariaLabel, endAt }) {
   const videoRef = useRef(null);
-  const [status, setStatus] = useState("loading");
+  const [error, setError] = useState(false);
 
-  const videoLabel = useMemo(() => `${title} video`, [title]);
+  const videoLabel = useMemo(
+    () =>
+      ariaLabel ??
+      (title ? (caption ? `${title}. ${caption}` : title) : "Project video"),
+    [ariaLabel, title, caption],
+  );
 
-  const handleReady = useCallback(() => {
-    setStatus("ready");
-  }, []);
+  const showHeading = Boolean(title);
 
   const handleError = useCallback(() => {
-    setStatus("error");
+    setError(true);
   }, []);
 
+  const handleTimeUpdate = useCallback(
+    (event) => {
+      if (endAt == null) return;
+      const el = event.currentTarget;
+      if (el.currentTime >= endAt) {
+        el.pause();
+        el.currentTime = endAt;
+      }
+    },
+    [endAt],
+  );
+
+  const handleSeeked = useCallback(
+    (event) => {
+      if (endAt == null) return;
+      const el = event.currentTarget;
+      if (el.currentTime > endAt) {
+        el.currentTime = endAt;
+      }
+    },
+    [endAt],
+  );
+
   useEffect(() => {
-    setStatus("loading");
+    setError(false);
     const el = videoRef.current;
     if (!el) return;
     el.load();
-  }, [src]);
+  }, [src, endAt]);
 
   return (
-    <div className="bg-neutral-950 px-4 pb-6 sm:px-6 md:px-8">
+    <div className="bg-white px-4 pb-6 sm:px-6 md:px-8 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl">
+        {showHeading ? (
+          <div className="mb-6 text-center sm:mb-8 sm:text-left">
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl dark:text-white">
+              {title}
+            </h2>
+            {caption ? (
+              <p className="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-neutral-600 sm:mx-0 md:text-lg dark:text-white/80">
+                {caption}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
         <div className={`${FRAME_CLASS} relative min-h-70 sm:min-h-90 md:min-h-105`}>
-          {status === "loading" ? (
-            <div className="absolute inset-0 z-10">
-              <VideoSkeleton label="Loading video…" />
-            </div>
-          ) : null}
-          {status === "error" ? (
+          {error ? (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-900 px-6 text-center">
               <p className="text-sm text-white/80">
                 Video could not be loaded. Please check your connection and try
@@ -57,9 +90,8 @@ function ProjectVideo({ src, title }) {
             preload="auto"
             aria-label={videoLabel}
             controlsList="nodownload noremoteplayback"
-            onLoadedMetadata={handleReady}
-            onLoadedData={handleReady}
-            onCanPlay={handleReady}
+            onTimeUpdate={handleTimeUpdate}
+            onSeeked={handleSeeked}
             onError={handleError}
           >
             Your browser does not support the video tag.
