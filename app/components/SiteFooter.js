@@ -98,7 +98,7 @@ export default function SiteFooter() {
                   href="tel:+15555550100"
                   className="transition hover:text-white hover:underline"
                 >
-                  +1 (555) 555-0100
+                  +234915555608
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -130,7 +130,7 @@ export default function SiteFooter() {
                   href="mailto:hello@contracosta.example"
                   className="transition hover:text-white hover:underline"
                 >
-                  hello@contracosta.example
+                  directorcontracostaresources@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
