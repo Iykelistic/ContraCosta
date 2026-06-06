@@ -1,5 +1,4 @@
 import ScrollProgress from "./components/ScrollProgress";
-import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
 export const metadata = {
@@ -14,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -30,10 +29,8 @@ export default function RootLayout({ children }) {
         >
           Skip to main content
         </a>
-        <ThemeProvider>
-          <ScrollProgress />
-          {children}
-        </ThemeProvider>
+        <ScrollProgress />
+        {children}
       </body>
     </html>
   );

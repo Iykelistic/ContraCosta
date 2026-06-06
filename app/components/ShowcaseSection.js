@@ -23,7 +23,7 @@ export default function ShowcaseSection() {
   return (
     <section
       id="projects"
-      className="scroll-mt-4 bg-white px-4 pb-12 font-sans dark:bg-zinc-950 sm:px-6 md:px-8 md:pb-16"
+      className="scroll-mt-4 bg-white px-4 pb-12 font-sans sm:px-6 md:px-8 md:pb-16"
       aria-labelledby="showcase-heading"
     >
       <h2 id="showcase-heading" className="sr-only">
@@ -78,13 +78,13 @@ export default function ShowcaseSection() {
 
       <div className="mx-auto mt-14 max-w-7xl sm:mt-16">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-dark dark:text-brand-accent">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-dark">
             Our work
           </p>
-          <h3 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl lg:text-4xl">
+          <h3 className="mt-2 text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl lg:text-4xl">
             Featured projects
           </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 md:text-base">
             A sample of recent builds across residential, commercial, and retail
             environments.
           </p>

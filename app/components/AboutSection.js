@@ -37,25 +37,25 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-4 overflow-x-clip bg-white px-4 pb-12 pt-2 font-sans dark:bg-zinc-950 sm:px-6 md:px-8 md:pb-16"
+      className="scroll-mt-4 overflow-x-clip bg-white px-4 pb-12 pt-2 font-sans sm:px-6 md:px-8 md:pb-16"
       aria-labelledby="about-heading"
     >
       <div className="mx-auto max-w-7xl min-w-0">
-        <div className="overflow-hidden rounded-3xl bg-white shadow-xl dark:bg-zinc-900 sm:rounded-[28px]">
+        <div className="overflow-hidden rounded-3xl bg-white shadow-xl sm:rounded-[28px]">
           <div className="grid min-w-0 gap-8 p-5 sm:gap-10 sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-12 md:p-12 lg:p-14">
             <div className="flex min-w-0 max-w-full flex-col justify-center">
-              <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400">
+              <p className="mb-3 max-w-full wrap-break-word font-serif text-sm font-medium uppercase tracking-[0.2em] text-neutral-600">
                 About Contra Costa
               </p>
               <h2
                 id="about-heading"
-                className="mb-4 max-w-full text-xl font-bold leading-snug tracking-tight text-neutral-800 wrap-anywhere dark:text-neutral-100 sm:text-2xl md:text-3xl md:leading-tight"
+                className="mb-4 max-w-full text-xl font-bold leading-snug tracking-tight text-neutral-800 wrap-anywhere sm:text-2xl md:text-3xl md:leading-tight"
               >
                 Engineering and construction you can plan around
               </h2>
               <div
                 id="about-story"
-                className="mb-8 max-w-full space-y-3.5 text-sm leading-relaxed text-neutral-600 wrap-anywhere dark:text-neutral-400 sm:text-base md:max-w-xl"
+                className="mb-8 max-w-full space-y-3.5 text-sm leading-relaxed text-neutral-600 wrap-anywhere sm:text-base md:max-w-xl"
               >
                 <p>
                   Contra-Costa Resources is a multidisciplinary construction,
@@ -167,7 +167,7 @@ export default function AboutSection() {
                     className={`h-2 rounded-full transition-all ${
                       i === slide
                         ? "w-6 bg-brand-green"
-                        : "w-2 bg-neutral-300 hover:bg-brand-green/70 dark:bg-zinc-600 dark:hover:bg-brand-green"
+                        : "w-2 bg-neutral-300 hover:bg-brand-green/70"
                     }`}
                   />
                 ))}

@@ -14,7 +14,6 @@ import {
   HERO_VIEWPORT_COLUMN_CLASS,
   MEDIA_COVER_CLASS,
 } from "@/lib/media";
-import ThemeToggle from "./ThemeToggle";
 
 const CAROUSEL_SLIDES = [
   {
@@ -143,7 +142,7 @@ export default function HeroSection() {
   const slideCount = activeSlides.length;
 
   return (
-    <div className="min-h-dvh bg-white p-4 pb-8 font-sans dark:bg-zinc-950 sm:p-6 md:p-8">
+    <div className="min-h-dvh bg-white p-4 pb-8 font-sans sm:p-6 md:p-8">
       <div className={HERO_VIEWPORT_COLUMN_CLASS}>
         <div
           className={`${HERO_CAROUSEL_SHELL_CLASS} isolate min-h-[min(680px,calc(100dvh-2rem))]`}
@@ -199,11 +198,10 @@ export default function HeroSection() {
               />
             </a>
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-              <ThemeToggle muted />
               <button
                 type="button"
                 onClick={() => setMenuOpen(true)}
-                className="hero-control-btn !bg-white gap-2 px-4 py-2.5 text-sm font-semibold tracking-wide sm:px-5 sm:text-[0.8125rem]"
+                className="hero-control-btn bg-white! gap-2 px-4 py-2.5 text-sm font-semibold tracking-wide sm:px-5 sm:text-[0.8125rem]"
                 aria-expanded={menuOpen}
                 aria-controls="site-menu"
               >
@@ -438,7 +436,7 @@ export default function HeroSection() {
                               router.prefetch(`/services/${service.slug}`);
                               prefetchVideo(service.video);
                             }}
-                            className="menu-service-item break-words text-sm font-normal leading-snug text-white/90 sm:text-base"
+                            className="menu-service-item wrap-break-word text-sm font-normal leading-snug text-white/90 sm:text-base"
                           >
                             {service.title}
                           </Link>

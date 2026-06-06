@@ -6,7 +6,7 @@ export default function SectionFallback({ label = "Loading section…" }) {
       aria-live="polite"
       aria-busy="true"
     >
-      <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+      <p className="text-sm font-medium text-neutral-600">
         {label}
       </p>
     </div>

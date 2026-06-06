@@ -18,18 +18,18 @@ const FeaturedProjectCard = memo(function FeaturedProjectCard({
       onMouseEnter={() => onPrefetch(project)}
       onFocus={() => onPrefetch(project)}
       onPointerDown={() => onPrefetch(project)}
-      className="featured-project-card group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:border-brand-green/30 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-brand-green/40 sm:p-7"
+      className="featured-project-card group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:border-brand-green/30 hover:shadow-md sm:p-7"
     >
-      <span className="text-xs font-semibold tabular-nums text-brand-dark/70 dark:text-brand-accent/80">
+      <span className="text-xs font-semibold tabular-nums text-brand-dark/70">
         {String(index + 1).padStart(2, "0")}
       </span>
-        <h4 className="mt-3 text-lg font-bold leading-snug tracking-tight text-neutral-900 transition group-hover:text-brand-dark dark:text-white dark:group-hover:text-brand-accent sm:text-xl">
+        <h4 className="mt-3 text-lg font-bold leading-snug tracking-tight text-neutral-900 transition group-hover:text-brand-dark sm:text-xl">
           {project.title}
         </h4>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-base">
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-600 md:text-base">
         {project.caption}
       </p>
-      <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark transition group-hover:gap-2.5 dark:text-brand-accent">
+      <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark transition group-hover:gap-2.5">
         View project
         <span aria-hidden>→</span>
       </span>

@@ -56,15 +56,15 @@ function ProjectVideo({ src, title, caption, ariaLabel, endAt }) {
   }, [src, endAt]);
 
   return (
-    <div className="bg-white px-4 pb-6 sm:px-6 md:px-8 dark:bg-neutral-950">
+    <div className="bg-white px-4 pb-6 sm:px-6 md:px-8">
       <div className="mx-auto max-w-7xl">
         {showHeading ? (
           <div className="mb-6 text-center sm:mb-8 sm:text-left">
-            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl dark:text-white">
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 md:text-3xl">
               {title}
             </h2>
             {caption ? (
-              <p className="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-neutral-600 sm:mx-0 md:text-lg dark:text-white/80">
+              <p className="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-neutral-600 sm:mx-0 md:text-lg">
                 {caption}
               </p>
             ) : null}

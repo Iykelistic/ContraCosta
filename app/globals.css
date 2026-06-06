@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 html {
   scroll-behavior: smooth;
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 ::selection {
@@ -68,11 +66,6 @@ html {
   --brand-hover: #3aa8c4;
   --brand-foreground: #0a3d4d;
   --brand-surface: #b5e3f0;
-}
-
-.dark {
-  --background: #09090b;
-  --foreground: #f4f4f5;
 }
 
 @theme inline {
@@ -189,12 +182,6 @@ body {
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.14);
 }
 
-.dark .hero-control-btn,
-.dark .hero-control-btn:hover {
-  background-color: #ffffff;
-  color: #737373;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .btn-cta:active {
     transform: none;
@@ -216,10 +203,6 @@ body {
     0 12px 24px rgb(0 0 0 / 0.08),
     0 4px 8px rgb(0 0 0 / 0.04);
   border-color: color-mix(in srgb, var(--brand) 40%, #e5e5e5);
-}
-
-.dark .featured-project-card:hover {
-  border-color: color-mix(in srgb, var(--color-brand-accent) 45%, #3f3f46);
 }
 
 .menu-service-trigger {
