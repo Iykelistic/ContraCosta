@@ -130,7 +130,7 @@ export default function SiteFooter() {
                   href="mailto:hello@contracosta.example"
                   className="transition hover:text-white hover:underline"
                 >
-                  directorcontracostaresources@gmail.com
+                  contracostaresources@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
