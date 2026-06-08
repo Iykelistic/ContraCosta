@@ -186,14 +186,14 @@ export default function HeroSection() {
           />
 
           <header className="relative z-10 flex items-start justify-between gap-3 p-5 sm:p-6 md:p-8">
-            <a href="#" className="relative z-10 block w-36 shrink-0 sm:w-44">
+            <a href="#" className="relative z-10 inline-block shrink-0 bg-white">
               <Image
-                src={IMAGES.logo}
-                alt="Contra Costa"
+                src={IMAGES.logoFooter}
+                alt="Contra Costa Resources"
                 width={260}
                 height={98}
                 unoptimized
-                className="h-auto w-full max-h-12 object-contain object-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.4)] sm:max-h-14"
+                className="block h-12 w-auto object-contain sm:h-14"
                 priority
               />
             </a>

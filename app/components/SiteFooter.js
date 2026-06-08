@@ -31,7 +31,7 @@ export default function SiteFooter() {
                 width={260}
                 height={98}
                 unoptimized
-                className="block h-10 w-auto object-contain sm:h-12"
+                className="block h-12 w-auto object-contain sm:h-14"
               />
             </Link>
           </div>
